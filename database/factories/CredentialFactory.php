@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\CredentialType;
+use App\Models\Credential;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +22,7 @@ class CredentialFactory extends Factory
         return [
             'name' => $this->faker->sentence(),
             'type' => [
-                'type' => 'Authorization-Header',
+                'type' => CredentialType::Bearer_Auth,
                 'prefix' => 'Bearer',
             ],
             'value' => $this->faker->uuid(),
