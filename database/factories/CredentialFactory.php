@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\CredentialType;
-use App\Models\Credential;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,7 +25,7 @@ class CredentialFactory extends Factory
                 'prefix' => 'Bearer',
             ],
             'value' => $this->faker->uuid(),
-            'user_id' => User::factory(), 
+            'user_id' => User::factory(),
         ];
     }
 }

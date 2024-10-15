@@ -12,7 +12,27 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('checks', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
+
+            $table->string('name');
+            $table->string('path');
+            $table->string('method')->default('GET');
+
+            $table->text('body')->nullable();
+            $table->json('headers')->nullable();
+            $table->json('parameters')->nullable();
+
+            $table->foreignUlid('credential_id')
+                ->nullable()
+                ->index()
+                ->constrained('credentials')
+                ->cascadeOnDelete();
+
+            $table->foreignUlid('service_id')
+                ->index()
+                ->constrained('services')
+                ->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

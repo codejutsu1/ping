@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('url')->unique();
 
             $table->foreignUlid('user_id')
-                    ->index()
-                    ->constrained('users')
-                    ->cascadeOnDelete();
+                ->index()
+                ->constrained('users')
+                ->cascadeOnDelete();
 
             $table->timestamps();
         });

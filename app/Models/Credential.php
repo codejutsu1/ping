@@ -6,18 +6,20 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Credential extends Model
 {
     /** @use HasFactory<\Database\Factories\CredentialFactory> */
     use HasFactory;
+
     use HasUlids;
 
     protected $fillable = [
         'name',
         'type',
         'value',
-        'user_id'
+        'user_id',
     ];
 
     public function user(): BelongsTo
@@ -25,9 +27,14 @@ class Credential extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function checks(): HasMany
+    {
+        return $this->hasMany(Check::class);
+    }
+
     public function casts(): array
     {
-        return  [
+        return [
             'type' => 'array',
             'value' => 'encrypted',
         ];
