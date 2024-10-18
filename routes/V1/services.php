@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Service;
 
 
-Route::get('/',)->name('index');
-Route::post('/',)->name('store');
-Route::get('{service}',)->name('show');
-Route::put('{service}',)->name('update');
-Route::delete('{service}',)->name('delete');
+Route::get('/', Service\IndexController::class)->name('index');
+Route::post('/', Service\StoreController::class)->name('store');
+Route::get('{service}', Service\ShowController::class)->name('show');
+Route::put('{service}', Service\UpdateController::class)->name('update');
+Route::delete('{service}', Service\DeleteController::class)->name('delete');

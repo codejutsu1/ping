@@ -1,10 +1,11 @@
 
 <?php
 
+use App\Http\Controllers\Check;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',)->name('index');
-Route::post('/',)->name('store');
-Route::get('{checks}',)->name('show');
-Route::put('{checks}',)->name('update');
-Route::delete('{checks}',)->name('delete');
+Route::get('/', Check\IndexController::class)->name('index');
+Route::post('/', Check\StoreController::class)->name('store');
+Route::get('{checks}', Check\ShowController::class)->name('show');
+Route::put('{checks}', Check\UpdateController::class)->name('update');
+Route::delete('{checks}', Check\DeleteController::class)->name('delete');

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->json('type');
             $table->text('value');
 
-            $table->foreignUlid('id')
+            $table->foreignUlid('user_id')
                 ->index()
                 ->constrained('users')
                 ->cascadeOnDelete();

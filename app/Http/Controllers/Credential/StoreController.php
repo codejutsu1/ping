@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Credential;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CreateController extends Controller
+class StoreController extends Controller
 {
-    //
+    public function __invoke()
+    {
+        //
+    }
 }
