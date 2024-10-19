@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Credential;
+use App\Http\Controllers\v1\Credential;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Credential\IndexController::class)->name('index');

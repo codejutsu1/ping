@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Credential;
+namespace App\Http\Controllers\v1\Credential;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

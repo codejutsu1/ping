@@ -1,7 +1,7 @@
 
 <?php
 
-use App\Http\Controllers\Check;
+use App\Http\Controllers\v1\Check;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Check\IndexController::class)->name('index');

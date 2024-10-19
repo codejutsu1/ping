@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Service;
+use App\Http\Controllers\v1\Service;
 
 
 Route::get('/', Service\IndexController::class)->name('index');

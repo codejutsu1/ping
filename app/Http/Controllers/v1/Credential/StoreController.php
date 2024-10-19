@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Check;
+namespace App\Http\Controllers\v1\Credential;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DeleteController extends Controller
+class StoreController extends Controller
 {
     public function __invoke()
     {
