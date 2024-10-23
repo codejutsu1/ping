@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\CredentialType;
 use App\Models\User;
+use App\Enums\CredentialType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
