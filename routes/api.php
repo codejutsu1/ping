@@ -3,11 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')->as('v1:')->group(function(){
-    Route::get('/', fn() => response()->json(request()->route()))->middleware(['sunset:' . now()->subDays(3)]);
+Route::prefix('v1')->as('v1:')->group(function () {
+    Route::get('/', fn () => response()->json(request()->route()))->middleware(['sunset:'.now()->subDays(3)]);
 
-
-    Route::middleware(['auth:sanctum', 'throttle:api'])->group(function() {
+    Route::middleware(['throttle:api'])->group(function () {
 
         Route::get('/user', function (Request $request) {
             return $request->user();

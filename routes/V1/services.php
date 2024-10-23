@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\Service;
-
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', Service\IndexController::class)->name('index');
 Route::post('/', Service\StoreController::class)->name('store');

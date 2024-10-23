@@ -12,14 +12,14 @@ class RateLimitServiceProvider extends ServiceProvider
     {
         RateLimiter::for(
             'api',
-            fn() => Limit::perMinute(
+            fn () => Limit::perMinute(
                 60
             )
         );
 
         RateLimiter::for(
             'auth',
-            fn() => Limit::perMinute(
+            fn () => Limit::perMinute(
                 5
             )
         );
