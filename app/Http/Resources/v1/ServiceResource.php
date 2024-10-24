@@ -3,8 +3,8 @@
 namespace App\Http\Resources\v1;
 
 use Illuminate\Http\Request;
-use TiMacDonald\JsonApi\Link;
 use TiMacDonald\JsonApi\JsonApiResource;
+use TiMacDonald\JsonApi\Link;
 
 class ServiceResource extends JsonApiResource
 {
@@ -34,7 +34,7 @@ class ServiceResource extends JsonApiResource
     public function toRelationships(Request $request): array
     {
         return [
-            'checks' => fn() => CheckResource::collection(
+            'checks' => fn () => CheckResource::collection(
                 $this->whenLoaded('checks')
             ),
 

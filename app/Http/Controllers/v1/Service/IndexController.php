@@ -17,7 +17,7 @@ class IndexController extends Controller
         $services = QueryBuilder::for(Service::class)->allowedIncludes(['checks'])
             ->getEloquentBuilder()
             ->allowedFilters([
-                'url'
+                'url',
             ])
             ->simplePaginate(config('app.pagination.limit'));
 

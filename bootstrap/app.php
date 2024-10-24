@@ -1,9 +1,13 @@
 <?php
 
+use App\Factories\ErrorFactory;
 use App\Http\Middleware\SunsetMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -25,5 +29,15 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+
+        $exceptions->render(
+            fn (UnprocessableEntityHttpException $exception, Request $request) => new JsonResponse(
+                data: $exception->getMessage(),
+                status: 422,
+            )
+        );
+
+        $exceptions->render(
+            fn (Throwable $exception, Request $request) => ErrorFactory::create($exception, $request)
+        );
     })->create();

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $service = Service::factory()->for($user)->create([
             'name' => 'Daniel API',
-            'url' => 'https://codejutsu.xyz'
+            'url' => 'https://codejutsu.xyz',
         ]);
 
         Check::factory()->for($service)->count(10)->create();
