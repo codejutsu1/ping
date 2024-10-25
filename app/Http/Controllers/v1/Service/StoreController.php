@@ -22,7 +22,7 @@ class StoreController extends Controller
     {
         if (! Gate::allows('create', Service::class)) {
             throw new UnauthorizedException(
-                message: 'You must verify your email before creating a new service.',
+                message: __('services.v1.create.failure'),
                 code: Response::HTTP_FORBIDDEN,
             );
         }
@@ -34,7 +34,7 @@ class StoreController extends Controller
         );
 
         return new MessageResponse(
-            message: 'Your service will be created in the background.',
+            message: __('services.v1.create.success'),
             status: Response::HTTP_ACCEPTED,
         );
 

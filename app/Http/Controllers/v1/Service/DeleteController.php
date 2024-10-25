@@ -21,7 +21,7 @@ class DeleteController extends Controller
     {
         if (! Gate::allows('delete', $service)) {
             throw new UnauthorizedException(
-                message: 'You are not authorized to delete a service that you do not own.',
+                message: __('services.v1.delete.failure'),
                 code: Response::HTTP_FORBIDDEN,
             );
         }
@@ -33,7 +33,7 @@ class DeleteController extends Controller
         );
 
         return new MessageResponse(
-            message: 'Your service will be deleted in the background.',
+            message: __('services.v1.delete.success'),
             status: Response::HTTP_ACCEPTED,
         );
     }
