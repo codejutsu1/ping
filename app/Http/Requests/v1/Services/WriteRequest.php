@@ -4,15 +4,9 @@ namespace App\Http\Requests\v1\Services;
 
 use App\Http\Payloads\CreateService;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreRequest extends FormRequest
+class WriteRequest extends FormRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [

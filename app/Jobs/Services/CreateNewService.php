@@ -2,11 +2,11 @@
 
 namespace App\Jobs\Services;
 
-use App\Models\Service;
 use App\Http\Payloads\CreateService;
+use App\Models\Service;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CreateNewService implements ShouldQueue
 {
@@ -19,7 +19,7 @@ class CreateNewService implements ShouldQueue
     public function handle(DatabaseManager $database): void
     {
         $database->transaction(
-            callback: fn() => Service::query()->create(
+            callback: fn () => Service::query()->create(
                 attributes: $this->payload->toArray(),
             ),
 

@@ -32,7 +32,7 @@ class ErrorFactory
             MethodNotAllowedException::class => new ErrorResponse(
                 data: new ApiError(
                     title: 'Method not allowed',
-                    detail: "You are trying to do a {$request->method()} request on an endpoint that only allows " . implode(', ', $exception->getAllowedMethods()),
+                    detail: "You are trying to do a {$request->method()} request on an endpoint that only allows ".implode(', ', $exception->getAllowedMethods()),
                     instance: $request->fullUrl(),
                     code: 'HTTP-405',
                     link: 'https://docs.treblle.com/errors/405'
