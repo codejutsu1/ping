@@ -8,20 +8,38 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\v1\ServiceResource;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\v1\Services\WriteRequest;
+use App\Http\Responses\V1\MessageResponse;
+use App\Jobs\Services\UpdateService;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\UnauthorizedException;
 
-class UpdateController extends Controller
+readonly class UpdateController
 {
-    public function __invoke(WriteRequest $request, Service $service): Response
+    public function __construct(
+        private Dispatcher $bus,
+    ) {}
+
+    public function __invoke(WriteRequest $request, Service $service): MessageResponse
     {
-        $service->update(
-            attributes: $request->payload()->toArray(),
+        if (! Gate::allows('update', $service)) {
+            throw new UnauthorizedException(
+                message: 'You are not authorized to update a service that you do not own.',
+                code: Response::HTTP_FORBIDDEN,
+            );
+        }
+
+        $this->bus->dispatch(
+            command: new UpdateService(
+                payload: $request->payload(),
+                service: $service,
+            )
         );
 
-        return new JsonResponse(
-            data: new ServiceResource(
-                $service->refresh(),
-            ),
-            status: Response::HTTP_CREATED
+        return new MessageResponse(
+            message: 'We will update your service in the background',
+            status: Response::HTTP_ACCEPTED,
         );
     }
 }
