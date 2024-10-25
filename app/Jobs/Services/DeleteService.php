@@ -2,26 +2,26 @@
 
 namespace App\Jobs\Services;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\Service;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\DatabaseManager;
 
 class DeleteService implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct()
+    public function __construct(
+        public readonly Service $service,
+    )
     {
-        //
     }
 
-    /**
-     * Execute the job.
-     */
-    public function handle(): void
+    public function handle(DatabaseManager $database): void
     {
-        //
+        $database->transaction(
+            callback: fn() => $this->service->delete(),
+            attempts: 3,
+        );
     }
 }
