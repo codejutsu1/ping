@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\v1\Service;
 
-use App\Models\Service;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\v1\ServiceResource;
-use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\v1\Services\WriteRequest;
 use App\Http\Responses\V1\MessageResponse;
 use App\Jobs\Services\UpdateService;
+use App\Models\Service;
 use Illuminate\Contracts\Bus\Dispatcher;
-use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\UnauthorizedException;
+use Symfony\Component\HttpFoundation\Response;
 
 readonly class UpdateController
 {
