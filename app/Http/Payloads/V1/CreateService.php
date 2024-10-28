@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Payloads;
+namespace App\Http\Payloads\V1;
 
 class CreateService
 {
