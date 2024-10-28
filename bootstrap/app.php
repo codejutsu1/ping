@@ -1,12 +1,19 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Factories\ErrorFactory;
-use App\Http\Middleware\SunsetMiddleware;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Application;
+use App\Http\Middleware\SunsetMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Treblle\SecurityHeaders\Http\Middleware\RemoveHeaders;
+use Treblle\SecurityHeaders\Http\Middleware\PermissionsPolicy;
+use Treblle\SecurityHeaders\Http\Middleware\SetReferrerPolicy;
+use Treblle\SecurityHeaders\Http\Middleware\ContentTypeOptions;
+use Treblle\SecurityHeaders\Http\Middleware\StrictTransportSecurity;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Treblle\SecurityHeaders\Http\Middleware\CertificateTransparencyPolicy;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -18,7 +25,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->api(prepend: [
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            EnsureFrontendRequestsAreStateful::class,
+            RemoveHeaders::class,
+            SetReferrerPolicy::class,
+            StrictTransportSecurity::class,
+            PermissionsPolicy::class,
+            ContentTypeOptions::class,
+            CertificateTransparencyPolicy::class,
         ]);
 
         $middleware->alias([
