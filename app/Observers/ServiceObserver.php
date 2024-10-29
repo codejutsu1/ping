@@ -34,7 +34,7 @@ class ServiceObserver
         );
     }
 
-    protected function forgetServiceForUser(int $id): void
+    protected function forgetServiceForUser(string $id): void
     {
         Cache::forget(
             key: CacheKey::User_servies->value . '_' . $id,

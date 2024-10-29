@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Check extends Model
 {
@@ -34,6 +35,14 @@ class Check extends Model
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(
+            related: Report::class,
+            foreignKey: 'check_id'
+        );
     }
 
     protected function casts(): array
